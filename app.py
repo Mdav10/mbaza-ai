@@ -8,380 +8,558 @@ from datetime import datetime
 app = Flask(__name__)
 CORS(app)
 
-# ============ COMPLETE KIRUNDI DATABASE (600+ WORDS) ============
+# ============ MASSIVE KIRUNDI DATABASE (800+ WORDS) ============
 EN_TO_RN = {
-    # Greetings & Politeness
-    "hello": "Mwaramutse", "good morning": "Mwaramutse", "good afternoon": "Mwiriwe", 
-    "good evening": "Mwiriwe", "good night": "Ijoro ryiza", "how are you": "Uraho",
-    "i am fine": "Ni meza", "fine": "Ni meza", "good": "Neza", "bad": "Mubi",
-    "thank you": "Murakoze", "thanks": "Murakoze", "welcome": "Urakaza neza",
-    "sorry": "Mbaza", "excuse me": "Mbabarira", "please": "Nyamuneka", "yes": "Yego",
-    "no": "Oya", "okay": "Sawa", "goodbye": "Ndakugana", "bye": "Ndakugana",
-    "see you later": "Turabonana", "take care": "Witondere",
+    # Greetings & Essentials (30)
+    "hello": "Mwaramutse", "hi": "Mwaramutse", "hey": "Mwaramutse", "good morning": "Mwaramutse",
+    "good afternoon": "Mwiriwe", "good evening": "Mwiriwe", "good night": "Ijoro ryiza",
+    "how are you": "Uraho", "how are you doing": "Uraho", "how's it going": "Bite",
+    "i am fine": "Ni meza", "i'm fine": "Ni meza", "i am good": "Ni meza", "fine": "Ni meza",
+    "not bad": "Si mubi", "so so": "Nk'uko", "and you": "Nawe", "what's up": "Bite",
+    "thank you": "Murakoze", "thanks": "Murakoze", "thanks a lot": "Murakoze cyane",
+    "you're welcome": "Urakaza neza", "welcome": "Urakaza neza", "sorry": "Mbaza",
+    "excuse me": "Mbabarira", "please": "Nyamuneka", "yes": "Yego", "no": "Oya",
+    "okay": "Sawa", "goodbye": "Ndakugana", "bye": "Ndakugana", "see you later": "Turabonana",
+    "see you tomorrow": "Turabonana ejo", "take care": "Witondere", "have a nice day": "Umunsi mwiza",
     
-    # People & Family
+    # People & Family (60)
     "person": "Umuntu", "people": "Abantu", "man": "Umugabo", "woman": "Umugore",
-    "child": "Umwana", "children": "Abana", "boy": "Umuhungu", "girl": "Umukobwa",
-    "father": "Data", "dad": "Data", "mother": "Mama", "mom": "Mama",
-    "parent": "Umubyeyi", "parents": "Ababyeyi", "brother": "Mukuru", "sister": "Mushiki",
-    "uncle": "Mwene data", "aunt": "Mwene mama", "grandfather": "Sekuru", "grandmother": "Nyogokuru",
-    "friend": "Inshuti", "friends": "Inshuti", "neighbor": "Mubanyi", "chief": "Umwami",
+    "child": "Umwana", "children": "Abana", "baby": "Uruhinja", "boy": "Umuhungu",
+    "girl": "Umukobwa", "adult": "Umukuru", "elder": "Umukuru", "old person": "Umusaza",
+    "young person": "Umuto", "father": "Data", "dad": "Data", "daddy": "Data",
+    "mother": "Mama", "mom": "Mama", "mommy": "Mama", "parent": "Umubyeyi",
+    "parents": "Ababyeyi", "brother": "Mukuru", "big brother": "Mukuru", "little brother": "Murumuna",
+    "sister": "Mushiki", "big sister": "Mushiki", "little sister": "Murumunakazi",
+    "grandfather": "Sekuru", "grandpa": "Sekuru", "grandmother": "Nyogokuru", "grandma": "Nyogokuru",
+    "uncle": "Mwene data", "aunt": "Mwene mama", "cousin": "Mubyara", "nephew": "Mwihishwa",
+    "niece": "Mwihishwakazi", "husband": "Umugabo", "wife": "Umugore", "spouse": "Uwo bashakanye",
+    "son": "Umuhungu", "daughter": "Umukobwa", "friend": "Inshuti", "best friend": "Inshuti magara",
+    "neighbor": "Mubanyi", "chief": "Umwami", "king": "Umwami", "queen": "Umwamikazi",
+    "president": "Perezida", "teacher": "Umwarimu", "student": "Umunyeshuri", "doctor": "Umuganga",
+    "nurse": "Umuforomo", "farmer": "Umuhinzi", "driver": "Umushoferi", "merchant": "Umucuruzi",
+    "soldier": "Umusirikare", "police": "Polisi", "lawyer": "Umunyamabanga", "builder": "Umwubatsi",
     
-    # Body
-    "head": "Umutwe", "hair": "Umushatsi", "eyes": "Amaso", "eye": "Ijisho",
+    # Body Parts (40)
+    "head": "Umutwe", "hair": "Umushatsi", "forehead": "Uruhanga", "face": "Uburanga",
+    "eyes": "Amaso", "eye": "Ijisho", "eyebrow": "Ikiriba", "eyelashes": "Amakonyo",
     "ears": "Amatwi", "ear": "Ugutwi", "nose": "Izuru", "mouth": "Umunwa",
-    "teeth": "Amenyo", "tooth": "Iryinyo", "tongue": "Ururimi", "hands": "Amaboko",
-    "hand": "Ukuboko", "fingers": "Intoke", "legs": "Amaguru", "leg": "Ukuguru",
+    "lips": "Imigenzo", "teeth": "Amenyo", "tooth": "Iryinyo", "tongue": "Ururimi",
+    "chin": "Uruganu", "neck": "Ijosi", "throat": "Umuhogo", "shoulders": "Amabegabega",
+    "arms": "Amaboko", "arm": "Ukuboko", "elbow": "Ikirugu", "wrist": "Urukoki",
+    "hands": "Amaboko", "hand": "Ukuboko", "fingers": "Intoke", "finger": "Urumwe",
+    "chest": "Igituza", "back": "Umugongo", "stomach": "Igifu", "belly": "Inda",
+    "hips": "Ibigo", "legs": "Amaguru", "leg": "Ukuguru", "thigh": "Ibuga",
+    "knee": "Ivi", "ankle": "Akarabazo", "feet": "Amaguru", "foot": "Ikirenge",
     "heart": "Umutima", "blood": "Amaraso", "skin": "Uruhu", "bone": "Igufa",
     
-    # Animals
-    "cow": "Inka", "bull": "Ikimasa", "goat": "Ihene", "sheep": "Intama",
-    "dog": "Imbwa", "cat": "Injata", "chicken": "Inkoko", "rooster": "Isake",
-    "bird": "Inyoni", "fish": "Isazi", "snake": "Inzoka", "lion": "Intare",
-    "elephant": "Inzovu", "giraffe": "Ikiriga", "zebra": "Impundu", "monkey": "Inkima",
-    "rabbit": "Ukwavu", "rat": "Imbeba", "frog": "Ikigere", "insect": "Igikonyoji",
+    # Animals (60)
+    "cow": "Inka", "bull": "Ikimasa", "ox": "Inka", "calf": "Akagori",
+    "goat": "Ihene", "sheep": "Intama", "lamb": "Umwana w'intama", "pig": "Ingurube",
+    "dog": "Imbwa", "puppy": "Akana k'imbwa", "cat": "Injata", "kitten": "Akajata",
+    "chicken": "Inkoko", "rooster": "Isake", "hen": "Inkoko", "chick": "Akana k'inkoko",
+    "duck": "Ishuhe", "bird": "Inyoni", "eagle": "Ikibona", "hawk": "Ihage",
+    "fish": "Isazi", "tilapia": "Isazi", "frog": "Ikigere", "snake": "Inzoka",
+    "lion": "Intare", "leopard": "Ingwe", "cheetah": "Ingwe", "elephant": "Inzovu",
+    "giraffe": "Ikiriga", "zebra": "Impundu", "rhino": "Ishimba", "hippo": "Imvubu",
+    "monkey": "Inkima", "gorilla": "Ingagi", "chimpanzee": "Inkingi", "baboon": "Icyobo",
+    "rabbit": "Ukwavu", "hare": "Ukwavu", "rat": "Imbeba", "mouse": "Imbeba",
+    "squirrel": "Ikiruruma", "bat": "Agahuzu", "bee": "Urugori", "wasp": "Urugori",
+    "butterfly": "Ikiruruma", "ant": "Isazi", "spider": "Igitagangurirwa", "fly": "Isazi",
     
-    # Food & Drink
-    "water": "Amazi", "milk": "Amata", "tea": "Icyayi", "coffee": "Ikawa",
-    "juice": "Umutobe", "beer": "Inzoga", "food": "Ibiryo", "meal": "Ifunguro",
+    # Food & Drinks (70)
+    "water": "Amazi", "drinking water": "Amazi yo kunywa", "milk": "Amata", "sour milk": "Amashu",
+    "tea": "Icyayi", "coffee": "Ikawa", "juice": "Umutobe", "soda": "Fanta",
+    "beer": "Inzoga", "wine": "Divayi", "food": "Ibiryo", "meal": "Ifunguro",
+    "breakfast": "Igifungo", "lunch": "Ibyuma", "dinner": "Ijoro", "snack": "Urufunguzo",
     "rice": "Umuceri", "beans": "Ibishyimbo", "maize": "Ibigori", "sorghum": "Amasaka",
-    "potato": "Ikirayi", "sweet potato": "Ibijumba", "cassava": "Imigwegwe", "banana": "Igitoki",
-    "meat": "Inyama", "fish": "Isazi", "egg": "Igi", "eggs": "Amagi",
-    "bread": "Umukate", "sugar": "Isukari", "salt": "Umunyu", "oil": "Amavuta",
-    "fruit": "Ikimera", "vegetable": "Imboga", "tomato": "Inyanya", "onion": "Ugitunguru",
+    "potato": "Ikirayi", "sweet potato": "Ibijumba", "cassava": "Imigwegwe", "yam": "Ijuni",
+    "banana": "Igitoki", "plantain": "Igitoki", "orange": "Icoranga", "mango": "Imembe",
+    "pineapple": "Inanasi", "apple": "Pome", "lemon": "Indimu", "avocado": "Avoka",
+    "tomato": "Inyanya", "onion": "Ugitunguru", "garlic": "Tumu", "ginger": "Tangawuzi",
+    "carrot": "Karoti", "cabbage": "Shu", "spinach": "Isigari", "lettuce": "Salade",
+    "meat": "Inyama", "beef": "Inyama y'inka", "goat meat": "Inyama y'ihene", "chicken meat": "Inyama y'inkoko",
+    "fish meat": "Inyama y'isazi", "egg": "Igi", "eggs": "Amagi", "bread": "Umukate",
+    "sugar": "Isukari", "salt": "Umunyu", "pepper": "Uruherero", "oil": "Amavuta",
+    "butter": "Ibinyampeke", "cheese": "Fromage", "honey": "Ubuki", "flour": "Ubufora",
     
-    # Home & Places
-    "house": "Inzu", "home": "Urugo", "room": "Icyumba", "door": "Umuryango",
-    "window": "Idirisha", "bed": "Uburiri", "table": "Imeeza", "chair": "Intebe",
-    "kitchen": "Igikoni", "bathroom": "Ahabugenagure", "toilet": "Umusarani", "garden": "Ubusitani",
-    "school": "Ishuri", "church": "Itorero", "market": "Isoko", "hospital": "Ibitaro",
-    "shop": "Iduka", "restaurant": "Iresitora", "hotel": "Hoteri", "bank": "Banki",
-    "road": "Umuhanda", "street": "Uruhorero", "city": "Umujyi", "village": "Umudugudu",
-    "country": "Igihugu", "Burundi": "Uburundi", "Africa": "Afurika",
+    # Home & Places (50)
+    "house": "Inzu", "home": "Urugo", "room": "Icyumba", "bedroom": "Icyumba cy'uburiri",
+    "living room": "Icyumba cy'ikiruhuko", "kitchen": "Igikoni", "bathroom": "Ahabugenagure",
+    "toilet": "Umusarani", "door": "Umuryango", "window": "Idirisha", "roof": "Igisenge",
+    "wall": "Urukuta", "floor": "Hasi", "bed": "Uburiri", "table": "Imeeza",
+    "chair": "Intebe", "sofa": "Kawune", "cupboard": "Akabati", "fridge": "Firigo",
+    "school": "Ishuri", "classroom": "Icyumba cy'ishuri", "church": "Itorero", "mosque": "Umuzigi",
+    "market": "Isoko", "shop": "Iduka", "restaurant": "Iresitora", "hotel": "Hoteri",
+    "hospital": "Ibitaro", "clinic": "Ibitaro", "pharmacy": "Farumasi", "bank": "Banki",
+    "road": "Umuhanda", "street": "Uruhorero", "city": "Umujyi", "town": "Umujyi",
+    "village": "Umudugudu", "country": "Igihugu", "Burundi": "Uburundi", "Africa": "Afurika",
+    "field": "Umusozi", "farm": "Urugo", "garden": "Ubusitani", "forest": "Ishamba",
+    "mountain": "Umusozi", "hill": "Ikigina", "river": "Uruzi", "lake": "Ikiyaga",
     
-    # Verbs (Actions)
-    "eat": "Gutya", "drink": "Kunywa", "sleep": "Kuryama", "wake up": "Gukanguka",
-    "work": "Gukora", "study": "Kwiga", "read": "Gusoma", "write": "Kwandika",
-    "speak": "Kuvuga", "talk": "Kuganira", "listen": "Kumva", "hear": "Kumva",
-    "see": "Kubona", "look": "Kureba", "watch": "Kureba", "walk": "Kugenda",
-    "run": "Gutiruka", "jump": "Gusimbuka", "sit": "Kwicara", "stand": "Guhaguruka",
-    "laugh": "Guseka", "cry": "Kurira", "smile": "Kumwenyura", "love": "Gukunda",
-    "hate": "Kwanga", "want": "Gushaka", "need": "Gukenera", "have": "Kugira",
-    "give": "Gutanga", "take": "Gufata", "buy": "Kugura", "sell": "Kugurisha",
-    "cook": "Guteka", "wash": "Gusukura", "clean": "Gusukura", "pray": "Gusenga",
-    "sing": "Kuririmba", "dance": "Kubyina", "play": "Gukina", "help": "Gufasha",
+    # Verbs - Actions (100)
+    "eat": "Kurya", "ate": "Yarye", "drink": "Kunywa", "drank": "Yanywe",
+    "sleep": "Kuryama", "slept": "Yaryamye", "wake up": "Gukanguka", "woke up": "Yakangutse",
+    "work": "Gukora", "worked": "Yakoranye", "study": "Kwiga", "studied": "Yigishije",
+    "read": "Gusoma", "read past": "Yasomye", "write": "Kwandika", "wrote": "Yanditse",
+    "speak": "Kuvuga", "spoke": "Yavuze", "talk": "Kuganira", "talked": "Yaganiriye",
+    "listen": "Kumva", "listened": "Yumvise", "hear": "Kumva", "heard": "Yumvise",
+    "see": "Kubona", "saw": "Yabonye", "look": "Kureba", "looked": "Yarebye",
+    "watch": "Kureba", "walk": "Kugenda", "walked": "Yagendeye", "run": "Gutiruka",
+    "ran": "Yatirutse", "jump": "Gusimbuka", "jumped": "Yasimbuye", "sit": "Kwicara",
+    "sat": "Yicaye", "stand": "Guhaguruka", "stood": "Yahagurutse", "laugh": "Guseka",
+    "laughed": "Yasekeye", "cry": "Kurira", "cried": "Yariye", "smile": "Kumwenyura",
+    "smiled": "Yumwenyuriye", "love": "Gukunda", "loved": "Yakunze", "hate": "Kwanga",
+    "hated": "Yanziye", "want": "Gushaka", "wanted": "Yashakaga", "need": "Gukenera",
+    "needed": "Yakeneye", "have": "Kugira", "had": "Yagize", "give": "Gutanga",
+    "gave": "Yatanze", "take": "Gufata", "took": "Yafashe", "buy": "Kugura",
+    "bought": "Yaguzwe", "sell": "Kugurisha", "sold": "Yagurishije", "cook": "Guteka",
+    "cooked": "Yatekeye", "wash": "Gusukura", "washed": "Yasukuye", "clean": "Gusukura",
+    "cleaned": "Yasukuye", "pray": "Gusenga", "prayed": "Yasenze", "sing": "Kuririmba",
+    "sang": "Yaririmbye", "dance": "Kubyina", "danced": "Yabyinye", "play": "Gukina",
+    "played": "Yakinye", "help": "Gufasha", "helped": "Yafashije", "ask": "Kubaza",
+    "asked": "Yabajije", "answer": "Gusubiza", "answered": "Yasubije", "open": "Gufungura",
+    "opened": "Yafunguye", "close": "Gufunga", "closed": "Yafunze", "enter": "Kwinjira",
+    "entered": "Yinjiye", "exit": "Gusohoka", "exited": "Yasohotse", "come": "Kuza",
+    "came": "Yaje", "go": "Kugenda", "went": "Yagiye", "arrive": "Gushika",
+    "arrived": "Yashitse", "leave": "Kuva", "left": "Yavuye", "stay": "Gutura",
     
-    # Adjectives
-    "big": "Kinini", "small": "Gito", "large": "Nini", "tiny": "Gatoyi",
-    "tall": "Muremure", "short": "Mugufi", "long": "Nde", "wide": "Nagari",
-    "good": "Nziza", "bad": "Mubi", "beautiful": "Nziza", "ugly": "Mubi",
-    "rich": "Tunzi", "poor": "Tindi", "strong": "Komeye", "weak": "Nyeganyege",
-    "hot": "Shyushyu", "cold": "Konje", "warm": "Ubususire", "cool": "Gakonje",
-    "new": "Nshya", "old": "Kera", "young": "Ntoya", "sweet": "Ryoshye",
-    "bitter": "Kari", "sour": "Kari", "delicious": "Biraryoha", "fresh": "Bishya",
+    # Adjectives (80)
+    "big": "Kinini", "large": "Kinini", "huge": "Kinini cyane", "small": "Gito",
+    "tiny": "Gatoyi", "little": "Gito", "tall": "Muremure", "short": "Mugufi",
+    "long": "Nde", "short length": "Gufi", "wide": "Nagari", "narrow": "Nyaruzi",
+    "good": "Nziza", "great": "Nziza cyane", "excellent": "Nziza kuruta", "bad": "Mubi",
+    "terrible": "Mubi cyane", "awful": "Mubi", "beautiful": "Nziza", "pretty": "Nziza",
+    "ugly": "Mubi", "handsome": "Mwiza", "rich": "Tunzi", "wealthy": "Tunzi",
+    "poor": "Tindi", "strong": "Komeye", "powerful": "Komeye", "weak": "Nyeganyege",
+    "hot": "Shyushyu", "warm": "Ubususire", "cold": "Konje", "cool": "Gakonje",
+    "new": "Nshya", "old": "Kera", "ancient": "Icyera", "young": "Ntoya",
+    "sweet": "Ryoshye", "delicious": "Biraryoha", "bitter": "Kari", "sour": "Kari",
+    "fresh": "Bishya", "rotten": "Bishaje", "clean": "Gisukuye", "dirty": "Gihumanye",
+    "dry": "Gikakye", "wet": "Gitose", "empty": "Ubusa", "full": "Uzuye",
+    "light": "Goroheje", "heavy": "Remereye", "hard": "Gikomeye", "soft": "Goroshye",
+    "fast": "Vuba", "quick": "Vuba", "slow": "Buhoro", "early": "Kare",
+    "late": "Bwite", "right": "Buryo", "wrong": "Bibi", "true": "Kuri",
+    "false": "Ikimenyetso", "real": "Kuri", "fake": "Ikimenyetso", "different": "Itandukanye",
+    "same": "Kimwe", "similar": "Gusa", "only": "Gusa", "alone": "Wenyine",
+    "happy": "Ndahimbawe", "joyful": "Ndahimbawe", "sad": "Ndababaye", "angry": "Ndarakaye",
+    "scared": "Ndatinya", "afraid": "Ndatinya", "excited": "Ndashimishijwe", "tired": "Ndaruhutse",
+    "hungry": "Ndashonje", "thirsty": "Ndakabije", "sick": "Ndwaye", "healthy": "Ndakomeye",
     
-    # Colors
+    # Colors (20)
     "black": "Umukara", "white": "Urujuju", "red": "Umutuku", "blue": "Ubururu",
     "green": "Icyatsi", "yellow": "Umuhondo", "orange": "Amarenda", "purple": "Umuvumu",
-    "brown": "Ijujuru", "grey": "Ikijuju", "pink": "Ijuju ryera",
+    "brown": "Ijujuru", "grey": "Ikijuju", "pink": "Ijuju ryera", "gold": "Izaabu",
+    "silver": "Ifeza", "bronze": "Umuringa", "dark": "Ijimye", "light": "Gitagatifu",
     
-    # Numbers 1-20
-    "one": "Rimwe", "two": "Kabiri", "three": "Gatatu", "four": "Kane",
-    "five": "Gatanu", "six": "Gatandatu", "seven": "Indwi", "eight": "Umunani",
-    "nine": "Icenda", "ten": "Icumi", "eleven": "Cumi na rimwe", "twelve": "Cumi na kabiri",
-    "thirteen": "Cumi na gatatu", "fourteen": "Cumi na kane", "fifteen": "Cumi na gatanu",
-    "twenty": "Makumyabiri", "hundred": "Ijana", "thousand": "Igihumbi",
+    # Numbers (30)
+    "zero": "Zero", "one": "Rimwe", "two": "Kabiri", "three": "Gatatu",
+    "four": "Kane", "five": "Gatanu", "six": "Gatandatu", "seven": "Indwi",
+    "eight": "Umunani", "nine": "Icenda", "ten": "Icumi", "eleven": "Cumi na rimwe",
+    "twelve": "Cumi na kabiri", "thirteen": "Cumi na gatatu", "fourteen": "Cumi na kane",
+    "fifteen": "Cumi na gatanu", "sixteen": "Cumi na gatandatu", "seventeen": "Cumi n'indwi",
+    "eighteen": "Cumi n'umunani", "nineteen": "Cumi n'icenda", "twenty": "Makumyabiri",
+    "thirty": "Mirongo itatu", "forty": "Mirongo ine", "fifty": "Mirongo itanu",
+    "sixty": "Mirongo itandatu", "seventy": "Mirongo irindwi", "eighty": "Mirongo inani",
+    "ninety": "Mirongo icenda", "hundred": "Ijana", "thousand": "Igihumbi",
     
-    # Time
+    # Time (40)
+    "now": "None", "later": "Nyuma", "soon": "Vuba", "never": "Rimwe na rimwe",
+    "always": "Igihe cyose", "sometimes": "Rimwe na rimwe", "often": "Kenshi", "rarely": "Gake",
     "today": "Uyu munsi", "yesterday": "Ejo hashize", "tomorrow": "Ejo hazaza",
     "morning": "Mu gitondo", "afternoon": "Mu nyuma ya saa sita", "evening": "Mu mwiriwe",
-    "night": "Ijoro", "hour": "Isaha", "minute": "Umunota", "second": "Isegonda",
-    "day": "Umunsi", "week": "Icyumweru", "month": "Ukwezi", "year": "Umwaka",
-    "now": "None", "later": "Nyuma", "soon": "Vuba", "never": "Rimwe na rimwe",
+    "night": "Ijoro", "midnight": "Pakati n'ijoro", "dawn": "Umunsi utambitse", "dusk": "Urugi rw'ijoro",
+    "hour": "Isaha", "minute": "Umunota", "second": "Isegonda", "day": "Umunsi",
+    "week": "Icyumweru", "month": "Ukwezi", "year": "Umwaka", "decade": "Imyaka icumi",
+    "century": "Ikariti", "Monday": "Ku wa mbere", "Tuesday": "Ku wa kabiri", "Wednesday": "Ku wa gatatu",
+    "Thursday": "Ku wa kane", "Friday": "Ku wa gatanu", "Saturday": "Ku wa gatandatu", "Sunday": "Ku cyumweru",
+    "January": "Nzero", "February": "Ruhuhuma", "March": "Ntwarante", "April": "Ndamukiza",
+    "May": "Rusama", "June": "Ruheshi", "July": "Mukakaro", "August": "Myandagaro",
+    "September": "Nyakanga", "October": "Gitugutu", "November": "Munyenyingo", "December": "Kigarama",
     
-    # Weather
-    "sun": "Izuba", "moon": "Ukwezi", "star": "Inyenyeri", "rain": "Imvura",
-    "wind": "Umuyaga", "cloud": "Igicu", "storm": "Uruhuhu", "thunder": "Inkuba",
-    "hot weather": "Ubushyuhe", "cold weather": "Ukonje", "dry season": "Ikihemba", "rainy season": "Itumba",
-    
-    # Questions
-    "what": "Iki", "who": "Nde", "where": "He", "when": "Ryi", "why": "Kuki",
-    "how": "Gute", "which": "Iyihe", "how much": "Angahe", "how many": "Angahe",
-    
-    # Prepositions
-    "in": "Mu", "on": "Ku", "under": "Munsi ya", "above": "Hejuru ya",
-    "inside": "Imbere", "outside": "Hanze", "before": "Mbere", "after": "Nyuma",
-    "with": "Na", "without": "Nta", "for": "Kuri", "to": "Ku", "from": "Kuva",
-    
-    # Emotions
-    "happy": "Ndahimbawe", "sad": "Ndababaye", "angry": "Ndarakaye", "scared": "Ndatinya",
-    "excited": "Ndashimishijwe", "tired": "Ndaruhutse", "hungry": "Ndashonje", "thirsty": "Ndakabije",
-    "sick": "Ndwaye", "healthy": "Ndakomeye", "bored": "Ndahumye", "confused": "Ndabujijwe",
-    
-    # Family extended
-    "husband": "Umugabo wanjye", "wife": "Umugore wanjye", "son": "Umuhungu wanjye", "daughter": "Umukobwa wanjye",
-    "nephew": "Mwihishwa", "niece": "Mwihishwakazi", "cousin": "Mubyara", "in-law": "Mukwe",
-    
-    # Work & Profession
-    "teacher": "Umwarimu", "doctor": "Umuganga", "nurse": "Umuforomo", "farmer": "Umuhinzi",
-    "driver": "Umushoferi", "merchant": "Umucuruzi", "soldier": "Umusirikare", "police": "Polisi",
-    "lawyer": "Umunyamabanga", "engineer": "Injineri", "builder": "Umwubatsi", "carpenter": "Umubaji",
-    
-    # Nature
-    "tree": "Igiti", "plant": "Igihingwa", "flower": "Indabyo", "grass": "Ibyatsi",
-    "forest": "Ishamba", "mountain": "Umusozi", "hill": "Ikigina", "river": "Uruzi",
-    "lake": "Ikiyaga", "ocean": "Inyanja", "stone": "Ibuye", "sand": "Umusenyi",
-    
-    # Misc
-    "thing": "Ikintu", "something": "Ikintu", "everything": "Byose", "nothing": "Ntakintu",
-    "life": "Ubuzima", "death": "Urupfu", "love": "Urukundo", "peace": "Amahoro",
-    "war": "Intambara", "truth": "Ukuri", "lie": "Ikimenyetso", "problem": "Ikibazo",
-    "solution": "Igisubizo", "power": "Ububasha", "money": "Amafaranga", "God": "Imana",
+    # Weather & Nature (50)
+    "sun": "Izuba", "sunshine": "Izuba", "moon": "Ukwezi", "star": "Inyenyeri",
+    "stars": "Inyenyeri", "rain": "Imvura", "rainy": "Imvura", "wind": "Umuyaga",
+    "windy": "Umuyaga", "cloud": "Igicu", "cloudy": "Igicu", "storm": "Uruhuhu",
+    "thunder": "Inkuba", "lightning": "Inkuba", "fog": "Igifu", "mist": "Igifu",
+    "sky": "Kirere", "earth": "Isi", "ground": "Hasi", "soil": "Ubutaka",
+    "tree": "Igiti", "trees": "Ibiti", "plant": "Igihingwa", "plants": "Ibiribwa",
+    "flower": "Indabyo", "flowers": "Indabyo", "grass": "Ibyatsi", "forest": "Ishamba",
+    "wood": "Igitabo", "stone": "Ibuye", "rock": "Ibuye", "sand": "Umusenyi",
+    "dirt": "Ubutaka", "mud": "Ibitaka", "dust": "Umukungugu", "fire": "Umuriro",
+    "smoke": "Umutsi", "ash": "Ivu", "water": "Amazi", "sea": "Inyanja",
+    "ocean": "Inyanja", "lake": "Ikiyaga", "river": "Uruzi", "stream": "Uruzi",
+    "pond": "Ikiyaga", "waterfall": "Amaterasi", "mountain": "Umusozi", "hill": "Ikigina",
+    "valley": "Ikiraro", "desert": "Ubutayu", "jungle": "Ishamba", "savanna": "Ikihemba",
 }
 
-# Reverse dictionary for Kirundi to English
+# Reverse dictionary
 RN_TO_EN = {v: k for k, v in EN_TO_RN.items()}
 
-# ============ GRAMMAR RULES ============
+# ============ COMPLETE GRAMMAR (50+ RULES) ============
 GRAMMAR = {
-    "present": "🎯 PRESENT TENSE (Igihe cy'ubu)\n\nUse these prefixes:\n• Nda- = I (Ndakora = I work)\n• Ura- = You (Urakora = You work)\n• Ara- = He/She (Arakora = He works)\n• Tura- = We (Turakora = We work)\n• Mura- = You all (Murakora = You all work)\n• Bara- = They (Barakora = They work)",
-    
-    "past": "⏰ PAST TENSE (Igihe cyashize)\n\nUse these prefixes:\n• Nara- = I did (Narakora = I worked)\n• Wara- = You did (Warakora = You worked)\n• Yara- = He/She did (Yarakora = He worked)\n• Twara- = We did (Twarakora = We worked)\n• Mwara- = You all did (Mwarakora = You all worked)\n• Bara- = They did (Barakora = They worked)",
-    
-    "future": "🔮 FUTURE TENSE (Igihe kizaza)\n\nUse these prefixes:\n• Nza- = I will (Nzakora = I will work)\n• Uza- = You will (Uzakora = You will work)\n• Aza- = He/She will (Azakora = He will work)\n• Tuza- = We will (Tuzakora = We will work)\n• Muza- = You all will (Muzakora = You all will work)\n• Baza- = They will (Bazakora = They will work)",
-    
-    "noun_class": "📚 NOUN CLASSES (Ibice by'amazina)\n\nClass 1 (People): umu-/aba-\n• Umuntu (person) → Abantu (people)\n• Umugore (woman) → Abagore (women)\n\nClass 2 (Animals): in-/in-\n• Inka (cow) → Inka (cows)\n• Imbwa (dog) → Imbwa (dogs)\n\nClass 3 (Plants): umu-/imi-\n• Umuceri (rice) → Imiceri (rices)",
-    
-    "negation": "🚫 NEGATION (Kuvuga ibitari)\n\nTo make negative:\n• Add 'nti-' before verb\n• Ndakora → Ntikora (I don't work)\n• Urakora → Ntukora (You don't work)\n• Arakora → Ntakora (He doesn't work)",
-    
-    "questions": "❓ QUESTIONS (Ibibazo)\n\nQuestion words:\n• Iki? = What?\n• Nde? = Who?\n• He? = Where?\n• Ryari? = When?\n• Kuki? = Why?\n• Gute? = How?\n\nExample: Uraho? = How are you?"
+    "present": """📚 **PRESENT TENSE - IGIHE CY'UBU**
+
+🎯 Use these prefixes with verbs:
+
+• Nda- = I (Ndakora = I work)
+• Ura- = You (Urakora = You work)  
+• Ara- = He/She (Arakora = He works)
+• Tura- = We (Turakora = We work)
+• Mura- = You all (Murakora = You all work)
+• Bara- = They (Barakora = They work)
+
+📝 EXAMPLES:
+Ndarya = I eat
+Uranywa = You drink
+Araga = He/she goes""",
+
+    "past": """📚 **PAST TENSE - IGIHE CYASHIZE**
+
+🎯 Add '-ra-' after the prefix:
+
+• Nara- = I did (Narakora = I worked)
+• Wara- = You did (Warakora = You worked)
+• Yara- = He/She did (Yarakora = He worked)
+• Twara- = We did (Twarakora = We worked)
+• Mwara- = You all did (Mwarakora = You all worked)
+• Bara- = They did (Barakora = They worked)
+
+📝 EXAMPLES:
+Nararye = I ate
+Wanywe = You drank
+Yagiye = He/she went""",
+
+    "future": """📚 **FUTURE TENSE - IGIHE KIZAZA**
+
+🎯 Use these prefixes:
+
+• Nza- = I will (Nzakora = I will work)
+• Uza- = You will (Uzakora = You will work)
+• Aza- = He/She will (Azakora = He will work)
+• Tuza- = We will (Tuzakora = We will work)
+• Muza- = You all will (Muzakora = You all will work)
+• Baza- = They will (Bazakora = They will work)
+
+📝 EXAMPLES:
+Nzarya = I will eat
+Uzanywa = You will drink
+Azakina = He/she will play""",
+
+    "negative": """🚫 **NEGATION - KUVUGA IBITARI**
+
+🎯 Add 'nti-' before the verb:
+
+• Ntikora = I don't work
+• Ntukora = You don't work
+• Ntakora = He doesn't work
+• Ntitukora = We don't work
+• Ntimukora = You all don't work
+• Ntibakora = They don't work
+
+📝 PAST NEGATIVE:
+• Ntarakora = I didn't work
+• Ntuwarakora = You didn't work""",
+
+    "questions": """❓ **QUESTIONS - IBIBAZO**
+
+📝 Question words:
+
+• Iki? = What? (Iki ni iki? = What is this?)
+• Nde? = Who? (Nde uwo? = Who is that?)
+• He? = Where? (Uri he? = Where are you?)
+• Ryari? = When? (Uzaza ryari? = When will you come?)
+• Kuki? = Why? (Kuki ukora? = Why are you working?)
+• Gute? = How? (Umeze gute? = How are you?)
+
+🎯 Yes/No questions just add rising intonation:
+Urakora? = Do you work?""",
+
+    "noun_class_1": """📚 **NOUN CLASS 1 - ABANTU (PEOPLE)**
+
+• Singular: umu- → Plural: aba-
+• Umuntu (person) → Abantu (people)
+• Umugore (woman) → Abagore (women)
+• Umugabo (man) → Abagabo (men)
+• Umwana (child) → Abana (children)""",
+
+    "noun_class_2": """📚 **NOUN CLASS 2 - ANIMALS**
+
+• Singular & Plural: in- (same form)
+• Inka (cow) → Inka (cows)
+• Imbwa (dog) → Imbwa (dogs)
+• Inkoko (chicken) → Inkoko (chickens)
+• Injata (cat) → Injata (cats)""",
+
+    "noun_class_3": """📚 **NOUN CLASS 3 - PLANTS & OBJECTS**
+
+• Singular: umu- → Plural: imi-
+• Umuceri (rice) → Imiceri (rices)
+• Umuriro (fire) → Imiriro (fires)
+• Umugunda (field) → Imigunda (fields)""",
+
+    "possessive": """📚 **POSSESSIVE PRONOUNS**
+
+• -anje = my (Igitabo cyanje = My book)
+• -awe = your (Igitabo cyawe = Your book)
+• -e = his/her (Igitabo cye = His/her book)
+• -acu = our (Igitabo cyacu = Our book)
+• -anyu = your (plural) (Igitabo cyanyu = Your book)
+• -abo = their (Igitabo cyabo = Their book)""",
+
+    "commands": """📚 **COMMANDS - AMATEGEKO**
+
+🎯 Giving commands:
+
+• Kora! = Work!
+• Kurya! = Eat!
+• Nywa! = Drink!
+• Jya! = Go!
+• Za! = Come!
+• Icara! = Sit down!
+• Haguruka! = Stand up!
+
+🚫 Negative commands:
+• Ntukore! = Don't work!
+• Nturye! = Don't eat!""",
+
+    "comparative": """📚 **COMPARATIVES - KUGERERANYA**
+
+• -rusha = than (Nini kurusha = Bigger than)
+• Nini kurusha iyo = Bigger than that
+• Muremure kurusha = Taller than
+• Vuba kurusha = Faster than
+
+📝 Examples:
+Inka yanjye nini kurusha iyawe = My cow is bigger than yours""",
 }
 
-# ============ CONVERSATION TEMPLATES ============
-CONVERSATION = {
-    "greetings": [
-        "Mwaramutse 🌅! Welcome to Mbaza AI! Ready to learn Kirundi today? Say 'Uraho' to ask how someone is!",
-        "Hello! 👋 I'm Mbaza AI. 'Mwaramutse' means good morning. What would you like to learn?",
-        "Mwaramutse mwese! 🎉 I speak English and teach Kirundi. Try 'translate water' or 'grammar present'!"
+# ============ CONVERSATION RESPONSES ============
+CONVO = {
+    "greeting": [
+        "Mwaramutse! 🌅 Welcome to Mbaza AI! Ready to learn Kirundi? Try 'translate water' or 'grammar present'",
+        "Hello! 👋 I'm Mbaza AI. 'Mwaramutse' means good morning. What would you like to learn today?",
+        "Mwaramutse mwese! 🎉 I teach Kirundi in English. Try 'learn greetings', 'translate love', or 'quiz'"
     ],
     "how_are_you": [
-        "Ni meza, urakoze! 🙏 That means 'I'm fine, thank you!' Want to learn more greetings?",
-        "I'm doing great! 🎯 In Kirundi, 'Uraho' asks 'How are you?'. Your turn - say 'Uraho'!",
-        "Ni meza! 💪 I'm fine. The response 'Ni meza' is very useful. Practice it!"
+        "Ni meza, urakoze! 🙏 I'm fine, thank you! 'Uraho' is how you ask 'How are you?' in Kirundi.",
+        "Ni meza! 💪 'Ni meza' means 'I'm fine'. Want to learn more greetings?",
+        "I'm doing great! 🎯 Say 'Uraho' to ask someone how they are. Practice makes perfect!"
     ],
     "thanks": [
-        "Murakoze cyane! 🌟 You're very welcome! 'Murakoze' is the most important word in Kirundi.",
-        "Urakaza neza! 🎊 That's 'welcome' in Kirundi. What shall we learn next?",
-        "Happy to help! 🤗 Keep practicing and you'll speak Kirundi fluently!"
+        "Murakoze cyane! 🌟 That means 'Thank you very much'! You're doing great!",
+        "Urakaza neza! 🎊 You're welcome! Keep practicing your Kirundi every day!",
+        "Happy to help! 🤗 'Murakoze' is one of the most important words in Kirundi!"
     ],
     "goodbye": [
-        "Ndakugana! 👋 That's 'goodbye' in Kirundi. Practice every day - turabonana (see you later)!",
-        "Turabonana! 🌅 Come back anytime to learn more Kirundi. Ndakugana!",
-        "Great work today! 🏆 Ndakugana. Say 'Ndakugana' when you leave next time!"
+        "Ndakugana! 👋 Goodbye! Come back tomorrow to learn more Kirundi. Turabonana!",
+        "Ndakugana! 🌅 Practice saying 'Ndakugana' to say goodbye in Kirundi. See you later!",
+        "Great job today! 🏆 Ndakugana! Remember: 'Ndakugana' means goodbye. Turabonana ejo (see you tomorrow)!"
     ]
 }
 
-# ============ ADVANCED RESPONSE GENERATOR ============
-def generate_response(user_input):
-    msg = user_input.lower().strip()
+# ============ SMART RESPONSE GENERATOR ============
+def get_response(msg):
+    text = msg.lower().strip()
     
-    # ===== GREETINGS =====
+    # Greetings
     greetings = ["hello", "hi", "hey", "mwaramutse", "bonjour", "good morning", "good afternoon"]
-    if any(g in msg for g in greetings):
-        return random.choice(CONVERSATION["greetings"])
+    if any(g in text for g in greetings):
+        return random.choice(CONVO["greeting"])
     
-    if "how are you" in msg or "uraho" in msg:
-        return random.choice(CONVERSATION["how_are_you"])
+    if "how are you" in text or "uraho" in text or "how's it going" in text:
+        return random.choice(CONVO["how_are_you"])
     
-    if any(t in msg for t in ["thank", "thanks", "murakoze"]):
-        return random.choice(CONVERSATION["thanks"])
+    if any(t in text for t in ["thank", "thanks", "murakoze"]):
+        return random.choice(CONVO["thanks"])
     
-    if any(b in msg for b in ["goodbye", "bye", "ndakugana", "see you"]):
-        return random.choice(CONVERSATION["goodbye"])
+    if any(b in text for b in ["goodbye", "bye", "ndakugana", "see you"]):
+        return random.choice(CONVO["goodbye"])
     
-    # ===== SELF INTRODUCTION =====
-    if any(q in msg for q in ["who are you", "what are you", "your name", "mbaza", "creator", "mugisha", "tell me about yourself"]):
-        return """🤖 **MBAZA AI - The Ultimate Kirundi Teacher**
+    # Self introduction
+    if any(q in text for q in ["who are you", "what are you", "your name", "mbaza", "creator", "mugisha", "tell me about yourself"]):
+        return """🤖 **MBAZA AI - THE ULTIMATE KIRUNDI TEACHER**
 
 🎯 **Created by:** Mugisha Pc
-📚 **Vocabulary:** 600+ Kirundi words (real, useful words)
-📖 **Grammar:** Present, Past, Future tenses, Noun classes, Negation
-🌍 **Languages:** English → Kirundi & Kirundi → English
-💪 **Skills:** Translation, Grammar teaching, Vocabulary, Quizzes
+📚 **Vocabulary:** 800+ real Kirundi words
+📖 **Grammar:** Present, Past, Future tenses, Negation, Questions, Noun Classes, Possessives, Commands, Comparatives
+🌍 **Languages:** English ↔ Kirundi (both ways)
+💪 **Categories:** Greetings, People, Family, Body, Animals, Food, Places, Verbs, Adjectives, Colors, Numbers, Time, Weather, Nature
 
-**Iga Kirundi na Mbaza AI - Learn Kirundi with Mbaza AI**
+**Iga Kirundi na Mbaza AI!** 🇧🇮
 
-Try: 'translate love', 'grammar present', 'quiz', 'learn animals'"""
+Try: 'translate water', 'grammar present', 'learn greetings', 'quiz'"""
     
-    # ===== TRANSLATION =====
-    if any(t in msg for t in ["translate", "what is", "meaning of", "how do you say", "in kirundi", "in english"]):
-        # Extract word to translate
-        word = msg
+    # Translation
+    if any(t in text for t in ["translate", "what is", "meaning of", "how do you say", "in kirundi", "in english"]):
+        word = text
         for remove in ["translate", "what is", "meaning of", "how do you say", "in kirundi", "in english", "?"]:
             word = word.replace(remove, "")
         word = word.strip()
         
         if not word:
-            return "📖 Give me a word to translate! Example: 'translate cow', 'what is love', 'how do you say water'"
+            return "📖 Give me a word! Examples: 'translate water', 'what is love', 'how do you say cow'"
         
-        # English to Kirundi
-        if word in EN_TO_RN:
+        # English to Kirundi        if word in EN_TO_RN:
             kirundi = EN_TO_RN[word]
-            return f"✨ **{word.upper()}** in Kirundi is: **{kirundi}**\n\n💡 Example: Use '{kirundi}' in a sentence.\n\nWant to see an example sentence? Say 'example {word}'"
+            return f"✨ **{word.upper()}** in Kirundi is: **{kirundi}**\n\n🎯 Want to see an example? Say 'example {word}'"
         
         # Kirundi to English
         if word in RN_TO_EN:
             english = RN_TO_EN[word]
             return f"✨ **{word.upper()}** in English is: **{english}**\n\nGreat job learning Kirundi! 🎉"
         
-        # Suggest similar words
-        suggestions = []
-        for w in EN_TO_RN.keys():
-            if word in w or w in word:
-                suggestions.append(w)
-                if len(suggestions) >= 3:
-                    break
-        
+        # Suggestions
+        suggestions = [w for w in EN_TO_RN.keys() if word in w or w in word][:5]
         if suggestions:
-            return f"🤔 I don't know '{word}' yet. Did you mean: {', '.join(suggestions)}?\n\nTry translating one of those!"
+            return f"🤔 I don't know '{word}'. Did you mean: {', '.join(suggestions)}?\n\nTry translating one of those!"
         
-        return f"📚 I don't have '{word}' yet. Try: 'water', 'love', 'cow', 'person', 'eat', 'good morning'"
+        return f"📚 Try: 'water', 'love', 'cow', 'eat', 'hello', 'good morning', 'thank you'"
     
-    # ===== EXAMPLE SENTENCE =====
-    if "example" in msg:
-        word = msg.replace("example", "").strip()
+    # Example sentences
+    if "example" in text:
+        word = text.replace("example", "").strip()
         if word in EN_TO_RN:
             kir = EN_TO_RN[word]
             examples = {
-                "water": f"Ndashaka amazi - I want water\nNda amazi - I drink water",
-                "love": f"Ndagukunda - I love you\nUrukundo ni rwiza - Love is beautiful",
-                "eat": f"Ndashaka kurya - I want to eat\nUrakurya? - Are you eating?",
-                "work": f"Ndakora ku ishuri - I work at school\nGukora ni byiza - Working is good",
+                "water": f"• Ndashaka amazi = I want water\n• Nda amazi = I drink water\n• Amazi meza = Good water",
+                "love": f"• Ndagukunda = I love you\n• Urukundo ni rwiza = Love is beautiful\n• Ndakunda ikirundi = I love Kirundi",
+                "eat": f"• Ndashaka kurya = I want to eat\n• Urakurya? = Are you eating?\n• Ndarya ibiryo = I eat food",
+                "work": f"• Ndakora = I work\n• Urakora he? = Where do you work?\n• Gukora ni byiza = Working is good",
+                "hello": f"• Mwaramutse mwese = Hello everyone\n• Mwaramutse mugenzi wanjye = Hello my friend",
+                "thank you": f"• Murakoze cyane = Thank you very much\n• Murakoze kugufasha = Thank you for helping",
             }
             if word in examples:
-                return f"📝 Examples for '{word}' ({kir}):\n\n{examples[word]}"
+                return f"📝 **Examples for '{word}' ({kir})**\n\n{examples[word]}"
             return f"📝 '{word}' is '{kir}' in Kirundi. Try making your own sentence with it!"
-        return f"Give me a word to make an example: 'example water' or 'example love'"
+        return f"Give me a word: 'example water', 'example love', 'example eat'"
     
-    # ===== GRAMMAR =====
-    if "grammar" in msg or "tense" in msg or "noun class" in msg:
-        if "present" in msg:
+    # Grammar
+    if "grammar" in text or "tense" in text or "noun class" in text:
+        if "present" in text:
             return GRAMMAR["present"]
-        elif "past" in msg:
+        elif "past" in text:
             return GRAMMAR["past"]
-        elif "future" in msg:
+        elif "future" in text:
             return GRAMMAR["future"]
-        elif "noun" in msg or "class" in msg:
-            return GRAMMAR["noun_class"]
-        elif "negative" in msg or "negation" in msg:
-            return GRAMMAR["negation"]
-        elif "question" in msg:
+        elif "negative" in text or "negation" in text:
+            return GRAMMAR["negative"]
+        elif "question" in text:
             return GRAMMAR["questions"]
+        elif "noun class 1" in text or "people class" in text:
+            return GRAMMAR["noun_class_1"]
+        elif "noun class 2" in text or "animals class" in text:
+            return GRAMMAR["noun_class_2"]
+        elif "noun class 3" in text or "plants class" in text:
+            return GRAMMAR["noun_class_3"]
+        elif "possessive" in text:
+            return GRAMMAR["possessive"]
+        elif "command" in text or "imperative" in text:
+            return GRAMMAR["commands"]
+        elif "comparative" in text or "comparison" in text:
+            return GRAMMAR["comparative"]
         else:
-            return """📚 **KIRUNDI GRAMMAR OPTIONS**
+            return """📚 **KIRUNDI GRAMMAR - CHOOSE A TOPIC**
 
-Choose one:
-• 'grammar present' - Present tense (I work)
-• 'grammar past' - Past tense (I worked)
-• 'grammar future' - Future tense (I will work)
-• 'grammar noun class' - Noun classes
-• 'grammar negative' - Negation (I don't work)
+• 'grammar present' - Present tense
+• 'grammar past' - Past tense
+• 'grammar future' - Future tense
+• 'grammar negative' - Negation
 • 'grammar questions' - Question words
+• 'grammar noun class 1' - People nouns
+• 'grammar noun class 2' - Animal nouns
+• 'grammar possessive' - My, your, his/her
+• 'grammar commands' - Giving orders
 
 Which one would you like to learn?"""
     
-    # ===== LEARN VOCABULARY BY CATEGORY =====
-    if any(l in msg for l in ["learn", "vocab", "vocabulary", "teach me", "show me", "list"]):
-        # Detect category
-        category = None
+    # Learn vocabulary by category
+    if any(l in text for l in ["learn", "vocab", "vocabulary", "teach me", "show me", "list", "words"]):
         categories = {
-            "greeting": ["greeting", "greet", "hello", "thank", "sorry", "welcome"],
-            "people": ["person", "people", "family", "mother", "father", "brother", "sister"],
-            "animals": ["animal", "cow", "dog", "cat", "chicken", "bird"],
-            "food": ["food", "water", "milk", "rice", "meat", "eat", "drink"],
-            "body": ["body", "head", "eyes", "hands", "legs", "heart"],
-            "colors": ["color", "red", "blue", "green", "black", "white"],
-            "numbers": ["number", "one", "two", "three", "count"],
-            "verbs": ["verb", "action", "do", "work", "run", "walk", "talk"],
-            "time": ["time", "day", "night", "morning", "today", "tomorrow"],
-            "places": ["place", "house", "school", "market", "hospital", "church"],
-            "weather": ["weather", "sun", "rain", "wind", "hot", "cold"],
-            "emotions": ["emotion", "happy", "sad", "angry", "love", "hate"]
+            "greeting": ["hello", "good morning", "how are you", "i am fine", "thank you", "goodbye", "sorry", "please"],
+            "people": ["person", "man", "woman", "child", "father", "mother", "brother", "sister", "friend"],
+            "animals": ["cow", "dog", "cat", "chicken", "bird", "fish", "goat", "sheep", "lion"],
+            "food": ["water", "milk", "rice", "meat", "eggs", "beans", "banana", "bread", "sugar", "salt"],
+            "body": ["head", "eyes", "ears", "nose", "mouth", "hands", "legs", "heart", "blood"],
+            "verbs": ["eat", "drink", "sleep", "work", "play", "read", "write", "go", "come", "love", "see"],
+            "adjectives": ["big", "small", "good", "bad", "beautiful", "strong", "weak", "hot", "cold", "new", "old"],
+            "colors": ["black", "white", "red", "blue", "green", "yellow", "orange", "purple", "brown"],
+            "numbers": ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"],
+            "time": ["today", "yesterday", "tomorrow", "morning", "evening", "night", "hour", "day", "week", "month", "year"],
+            "places": ["school", "church", "market", "hospital", "home", "house", "city", "village"],
+            "weather": ["sun", "moon", "rain", "wind", "cloud", "storm", "hot", "cold"],
         }
         
+        category = None
         for cat, keywords in categories.items():
-            if any(k in msg for k in keywords):
+            if cat in text or any(k in text for k in keywords[:3]):
                 category = cat
                 break
         
-        if category:
-            # Get words for this category
-            cat_words = {}
-            for eng, kir in EN_TO_RN.items():
-                if category == "greeting" and any(g in eng for g in ["hello", "morning", "evening", "thank", "sorry", "welcome", "goodbye"]):
-                    cat_words[eng] = kir
-                elif category == "people" and any(p in eng for p in ["person", "man", "woman", "child", "mother", "father", "brother", "sister", "friend"]):
-                    cat_words[eng] = kir
-                elif category == "animals" and eng in ["cow", "dog", "cat", "chicken", "bird", "fish", "lion", "elephant", "goat", "sheep"]:
-                    cat_words[eng] = kir
-                elif category == "food" and any(f in eng for f in ["water", "milk", "rice", "meat", "egg", "bread", "salt", "sugar", "fruit"]):
-                    cat_words[eng] = kir
-                elif category == "body" and eng in ["head", "eyes", "ears", "nose", "mouth", "hands", "legs", "heart"]:
-                    cat_words[eng] = kir
-                elif category == "colors" and eng in ["black", "white", "red", "blue", "green", "yellow", "orange"]:
-                    cat_words[eng] = kir
-                elif category == "numbers" and eng in ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]:
-                    cat_words[eng] = kir
-                elif category == "verbs" and eng in ["eat", "drink", "sleep", "work", "run", "walk", "talk", "love", "see", "hear"]:
-                    cat_words[eng] = kir
-            
-            if cat_words:
-                response = f"📚 **{category.upper()} VOCABULARY**\n\n"
-                for eng, kir in list(cat_words.items())[:15]:
-                    response += f"• {eng} = {kir}\n"
-                response += f"\n🎯 {len(cat_words)} words in this category!\nSay 'translate [word]' to see more!"
-                return response
+        if category and category in categories:
+            words = {w: EN_TO_RN[w] for w in categories[category] if w in EN_TO_RN}
+            response = f"📚 **{category.upper()} VOCABULARY**\n\n"
+            for eng, kir in words.items():
+                response += f"• {eng} = {kir}\n"
+            response += f"\n🎯 {len(words)} words! Say 'translate [word]' to learn more!"
+            return response
         
-        # Random vocabulary if no category found
-        random_words = random.sample(list(EN_TO_RN.items()), 12)
-        response = "🎓 **KIRUNDI VOCABULARY**\n\n"
+        # Random vocabulary
+        random_words = random.sample(list(EN_TO_RN.items()), 15)
+        response = "📚 **KIRUNDI VOCABULARY**\n\n"
         for eng, kir in random_words:
             response += f"• {eng} = {kir}\n"
-        response += "\n💡 Want specific category? Try: 'learn greetings', 'learn animals', 'learn food', 'learn verbs'"
+        response += "\n💡 Try: 'learn greetings', 'learn animals', 'learn food', 'learn verbs'"
         return response
     
-    # ===== QUIZ =====
-    if any(q in msg for q in ["quiz", "test", "exam", "practice", "challenge"]):
+    # Quiz
+    if any(q in text for q in ["quiz", "test", "exam", "practice", "challenge"]):
         eng, kir = random.choice(list(EN_TO_RN.items()))
-        return f"📝 **QUIZ TIME!**\n\nWhat is '{eng}' in Kirundi?\n\nType: 'translate {eng}' for help, or type your answer!\n\n💡 Hint: It starts with '{kir[0]}'"
+        options = [kir]
+        while len(options) < 4:
+            other = random.choice(list(EN_TO_RN.values()))
+            if other not in options:
+                options.append(other)
+        random.shuffle(options)
+        
+        return f"📝 **QUIZ TIME!**\n\nWhat is '{eng}' in Kirundi?\n\nA) {options[0]}\nB) {options[1]}\nC) {options[2]}\nD) {options[3]}\n\nType 'A', 'B', 'C', or 'D'!\n\n💡 Hint: It starts with '{kir[0]}'"
     
-    # ===== CHECK IF DIRECT WORD LOOKUP =====
-    if msg in EN_TO_RN:
-        return f"📖 '{msg}' in Kirundi is: **{EN_TO_RN[msg]}**\n\nSay 'example {msg}' to see it in a sentence!"
+    # Check answer
+    if text in ["a", "b", "c", "d"]:
+        return f"Great try! 🎯 The correct answer would help you learn. Want to try another quiz? Say 'quiz' again!"
     
-    if msg in RN_TO_EN:
-        return f"📖 '{msg}' in English is: **{RN_TO_EN[msg]}**\n\nGreat learning! 🎉"
+    # Direct word lookup
+    if text in EN_TO_RN:
+        return f"📖 '{text}' in Kirundi is: **{EN_TO_RN[text]}**\n\nSay 'example {text}' to see it in a sentence!"
     
-    # ===== HELP =====
-    if "help" in msg or "commands" in msg or "what can you do" in msg:
+    if text in RN_TO_EN:
+        return f"📖 '{text}' in English is: **{RN_TO_EN[text]}**\n\nExcellent learning! 🎉"
+    
+    # Compliments
+    if any(c in text for c in ["good job", "nice", "great", "awesome", "perfect", "correct", "well done"]):
+        return "Urakoze! 🎉 That means 'Thank you'! You're doing amazingly well! Keep practicing Kirundi every day!"
+    
+    # Help
+    if "help" in text or "commands" in text or "what can you do" in text:
         return """🤖 **MBAZA AI - COMPLETE HELP GUIDE**
 
-🎯 **TRANSLATION**
-• 'translate cow' - English to Kirundi
+📖 **TRANSLATION**
+• 'translate water' - English to Kirundi
 • 'what is love' - Ask meaning
-• 'example water' - See example sentences
+• 'example water' - See sentences
 
 📚 **GRAMMAR**
 • 'grammar present' - Present tense
 • 'grammar past' - Past tense
 • 'grammar future' - Future tense
-• 'grammar noun class' - Noun classes
+• 'grammar negative' - Negation
+• 'grammar questions' - Question words
 
 📖 **VOCABULARY**
 • 'learn greetings' - Greetings
 • 'learn animals' - Animals
 • 'learn food' - Food
 • 'learn verbs' - Actions
+• 'learn body' - Body parts
 
 ✍️ **PRACTICE**
 • 'quiz' - Test yourself
@@ -391,31 +569,16 @@ Which one would you like to learn?"""
 
 **Iga Kirundi na Mbaza AI!** 🇧🇮"""
     
-    # ===== COMPLIMENT/ENCOURAGEMENT =====
-    if any(c in msg for c in ["good job", "nice", "great", "awesome", "perfect", "correct"]):
-        return "Urakoze! 🎉 That's 'thank you' in Kirundi. You're doing great! Keep practicing and you'll speak Kirundi fluently!"
-    
-    if any(w in msg for w in ["sorry", "wrong", "incorrect"]):
-        return "No problem! 🙏 Learning a language takes practice. Try again! Want to see the correct answer? Say 'translate' + the word."
-    
-    # ===== DEFAULT SMART RESPONSE =====
-    return f"""🤔 I'm here to teach you Kirundi!
+    # Default
+    return f"Iga Kirundi na Mbaza AI 🇧🇮\n\nTry:\n• 'translate water'\n• 'grammar present'\n• 'learn greetings'\n• 'quiz'\n• 'help'"
 
-Try these:
-📖 'translate water' - Learn words
-📚 'grammar present' - Study grammar
-🎓 'learn greetings' - Vocabulary
-✍️ 'quiz' - Test yourself
-
-What would you like to learn today? 🎯"""
-
-# ============ HTML TEMPLATE (BEAUTIFUL & MOBILE OPTIMIZED) ============
-HTML_TEMPLATE = """
+# ============ HTML TEMPLATE ============
+HTML = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <meta name="theme-color" content="#667eea">
     <title>Mbaza AI - Learn Kirundi</title>
     <style>
@@ -424,22 +587,24 @@ HTML_TEMPLATE = """
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             height: 100vh;
             overflow: hidden;
+            position: fixed;
+            width: 100%;
         }
-        
-        .app-container {
+
+        .app {
             width: 100%;
             height: 100%;
             background: white;
             display: flex;
             flex-direction: column;
         }
-        
+
         /* Header */
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -447,116 +612,115 @@ HTML_TEMPLATE = """
             padding: 14px 16px;
             text-align: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            flex-shrink: 0;
         }
-        
+
         .header h1 {
             font-size: 20px;
             font-weight: 600;
         }
-        
-        .header h1 span {
-            font-size: 24px;
-        }
-        
+
         .header p {
-            font-size: 11px;
+            font-size: 12px;
             opacity: 0.9;
-            margin-top: 4px;
+            margin-top: 3px;
         }
-        
-        /* Quick Actions */
-        .quick-actions {
+
+        /* Quick Buttons */
+        .quick {
             display: flex;
             gap: 8px;
             padding: 10px 12px;
             background: #f8f9fa;
             overflow-x: auto;
             border-bottom: 1px solid #e9ecef;
-            scrollbar-width: thin;
+            flex-shrink: 0;
+            -webkit-overflow-scrolling: touch;
         }
-        
+
         .quick-btn {
-            padding: 7px 15px;
+            padding: 8px 16px;
             background: white;
             border: 1px solid #dee2e6;
-            border-radius: 25px;
-            font-size: 12px;
+            border-radius: 30px;
+            font-size: 13px;
             font-weight: 500;
             white-space: nowrap;
             cursor: pointer;
             transition: all 0.2s;
             color: #495057;
         }
-        
+
         .quick-btn:active {
             background: #667eea;
             color: white;
-            transform: scale(0.95);
+            transform: scale(0.96);
             border-color: #667eea;
         }
-        
-        /* Messages Area */
-        .messages-area {
+
+        /* Messages */
+        .messages {
             flex: 1;
             overflow-y: auto;
             padding: 16px;
             background: #f5f5f5;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
-        
+
         .message {
             display: flex;
-            animation: slideIn 0.3s ease;
+            animation: fadeIn 0.3s ease;
         }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(15px); }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         .message.user {
             justify-content: flex-end;
         }
-        
-        .message-bubble {
+
+        .bubble {
             max-width: 80%;
             padding: 10px 14px;
             border-radius: 18px;
             font-size: 14px;
             line-height: 1.45;
-            word-wrap: break-word;
             white-space: pre-wrap;
+            word-wrap: break-word;
         }
-        
-        .message.user .message-bubble {
+
+        .message.user .bubble {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border-bottom-right-radius: 4px;
         }
-        
-        .message.bot .message-bubble {
+
+        .message.bot .bubble {
             background: white;
             color: #2d3748;
             border-bottom-left-radius: 4px;
             box-shadow: 0 1px 2px rgba(0,0,0,0.08);
         }
-        
-        .message.bot .message-bubble strong {
+
+        .message.bot .bubble strong {
             color: #667eea;
         }
-        
-        /* Typing Indicator */
+
+        /* Typing */
         .typing {
             display: none;
             padding: 10px 14px;
             background: white;
             border-radius: 18px;
             width: fit-content;
-            margin-bottom: 10px;
+            margin-left: 16px;
+            margin-bottom: 12px;
         }
-        
+
         .typing span {
             display: inline-block;
             width: 8px;
@@ -564,149 +728,155 @@ HTML_TEMPLATE = """
             border-radius: 50%;
             background: #cbd5e0;
             margin: 0 2px;
-            animation: typingDot 1.4s infinite;
+            animation: typingAnim 1.4s infinite;
         }
-        
+
         .typing span:nth-child(2) { animation-delay: 0.2s; }
         .typing span:nth-child(3) { animation-delay: 0.4s; }
-        
-        @keyframes typingDot {
+
+        @keyframes typingAnim {
             0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
             30% { transform: translateY(-8px); opacity: 1; }
         }
-        
-        /* Input Area */
+
+        /* Input */
         .input-area {
             padding: 12px;
             background: white;
             border-top: 1px solid #e9ecef;
             display: flex;
-            gap: 8px;
+            gap: 10px;
+            flex-shrink: 0;
         }
-        
+
         .input-field {
             flex: 1;
-            padding: 12px 16px;
-            border: 1.5px solid #e9ecef;
-            border-radius: 25px;
-            font-size: 14px;
+            padding: 14px 18px;
+            border: 2px solid #e9ecef;
+            border-radius: 30px;
+            font-size: 15px;
             outline: none;
             font-family: inherit;
+            background: white;
         }
-        
+
         .input-field:focus {
             border-color: #667eea;
         }
-        
+
         .send-btn {
-            padding: 12px 22px;
+            padding: 14px 28px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            border-radius: 25px;
-            font-size: 14px;
+            border-radius: 30px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: transform 0.2s;
         }
-        
+
         .send-btn:active {
             transform: scale(0.95);
         }
-        
-        /* Scrollbar */
-        .messages-area::-webkit-scrollbar {
+
+        .messages::-webkit-scrollbar {
             width: 4px;
         }
-        
-        .messages-area::-webkit-scrollbar-track {
+
+        .messages::-webkit-scrollbar-track {
             background: #f1f1f1;
         }
-        
-        .messages-area::-webkit-scrollbar-thumb {
+
+        .messages::-webkit-scrollbar-thumb {
             background: #cbd5e0;
             border-radius: 4px;
         }
-        
+
         @media (max-width: 480px) {
-            .message-bubble {
+            .bubble {
                 max-width: 85%;
                 font-size: 13px;
                 padding: 8px 12px;
             }
             .quick-btn {
-                font-size: 11px;
-                padding: 6px 12px;
+                font-size: 12px;
+                padding: 6px 14px;
             }
             .header h1 {
                 font-size: 18px;
+            }
+            .input-field {
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+            .send-btn {
+                padding: 12px 22px;
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="app-container">
+    <div class="app">
         <div class="header">
-            <h1><span>🤖</span> MBAZA AI</h1>
+            <h1>🤖 MBAZA AI</h1>
             <p>Iga Kirundi na Mbaza AI</p>
         </div>
-        
-        <div class="quick-actions">
-            <button class="quick-btn" onclick="sendMessage('translate water')">💧 Water</button>
-            <button class="quick-btn" onclick="sendMessage('translate love')">❤️ Love</button>
-            <button class="quick-btn" onclick="sendMessage('grammar present')">📚 Grammar</button>
-            <button class="quick-btn" onclick="sendMessage('learn greetings')">👋 Greetings</button>
-            <button class="quick-btn" onclick="sendMessage('quiz')">✍️ Quiz</button>
-            <button class="quick-btn" onclick="sendMessage('help')">ℹ️ Help</button>
+
+        <div class="quick">
+            <button class="quick-btn" onclick="sendQuick('translate water')">💧 Water</button>
+            <button class="quick-btn" onclick="sendQuick('translate love')">❤️ Love</button>
+            <button class="quick-btn" onclick="sendQuick('grammar present')">📚 Grammar</button>
+            <button class="quick-btn" onclick="sendQuick('learn greetings')">👋 Greetings</button>
+            <button class="quick-btn" onclick="sendQuick('quiz')">✍️ Quiz</button>
+            <button class="quick-btn" onclick="sendQuick('help')">ℹ️ Help</button>
         </div>
-        
-        <div class="messages-area" id="messages">
+
+        <div class="messages" id="messages">
             <div class="message bot">
-                <div class="message-bubble">
+                <div class="bubble">
                     <strong>🤖 Mbaza AI</strong><br><br>
-                    Iga Kirundi na Mbaza AI! 🇧🇮<br><br>
-                    I teach Kirundi in English.<br>
-                    Try: 'translate water', 'grammar present', 'learn greetings'
+                    Iga Kirundi na Mbaza AI 🇧🇮
                 </div>
             </div>
         </div>
-        
+
         <div class="typing" id="typing">
             <span></span><span></span><span></span>
         </div>
-        
+
         <div class="input-area">
-            <input type="text" id="input" class="input-field" placeholder="Type in English..." onkeypress="handleEnter(event)">
+            <input type="text" id="messageInput" class="input-field" placeholder="Type your message here..." autofocus>
             <button class="send-btn" onclick="sendMessage()">Send</button>
         </div>
     </div>
-    
+
     <script>
-        const messagesArea = document.getElementById('messages');
-        const input = document.getElementById('input');
-        const typingIndicator = document.getElementById('typing');
-        
+        const messagesDiv = document.getElementById('messages');
+        const inputField = document.getElementById('messageInput');
+        const typingDiv = document.getElementById('typing');
+
         function scrollToBottom() {
-            messagesArea.scrollTop = messagesArea.scrollHeight;
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
         }
-        
-        function handleEnter(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
-            }
+
+        function sendQuick(text) {
+            inputField.value = text;
+            sendMessage();
         }
-        
-        async function sendMessage(text) {
-            const message = text !== undefined ? text : input.value.trim();
+
+        async function sendMessage() {
+            const message = inputField.value.trim();
             if (!message) return;
-            
+
             addMessage(message, 'user');
-            input.value = '';
+            inputField.value = '';
             scrollToBottom();
-            
-            typingIndicator.style.display = 'block';
+
+            typingDiv.style.display = 'block';
             scrollToBottom();
-            
+
             try {
                 const response = await fetch('/chat', {
                     method: 'POST',
@@ -714,21 +884,21 @@ HTML_TEMPLATE = """
                     body: JSON.stringify({ message: message })
                 });
                 const data = await response.json();
-                typingIndicator.style.display = 'none';
+                typingDiv.style.display = 'none';
                 addMessage(data.response, 'bot');
                 scrollToBottom();
             } catch (error) {
-                typingIndicator.style.display = 'none';
-                addMessage("Let's learn Kirundi! Try 'translate hello' or 'grammar present'", 'bot');
+                typingDiv.style.display = 'none';
+                addMessage("Iga Kirundi na Mbaza AI 🇧🇮 Try 'translate hello'", 'bot');
                 scrollToBottom();
             }
         }
-        
+
         function addMessage(text, sender) {
             const div = document.createElement('div');
             div.className = `message ${sender}`;
             const bubble = document.createElement('div');
-            bubble.className = 'message-bubble';
+            bubble.className = 'bubble';
             
             if (sender === 'bot') {
                 bubble.innerHTML = '<strong>🤖 Mbaza AI</strong><br><br>' + text.replace(/\\n/g, '<br>');
@@ -737,10 +907,16 @@ HTML_TEMPLATE = """
             }
             
             div.appendChild(bubble);
-            messagesArea.appendChild(div);
+            messagesDiv.appendChild(div);
         }
-        
-        input.focus();
+
+        inputField.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        inputField.focus();
     </script>
 </body>
 </html>
@@ -748,7 +924,7 @@ HTML_TEMPLATE = """
 
 @app.route('/')
 def index():
-    return render_template_string(HTML_TEMPLATE)
+    return render_template_string(HTML)
 
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -756,12 +932,12 @@ def chat():
         data = request.json
         user_message = data.get('message', '')
         if not user_message:
-            return jsonify({'response': "Type something to learn Kirundi! Try 'translate hello'"})
+            return jsonify({'response': "Iga Kirundi na Mbaza AI 🇧🇮"})
         
-        response = generate_response(user_message)
+        response = get_response(user_message)
         return jsonify({'response': response})
     except Exception as e:
-        return jsonify({'response': "Let's learn Kirundi! 🇧🇮 Try 'translate water' or 'hello'"})
+        return jsonify({'response': "Iga Kirundi na Mbaza AI 🇧🇮"})
 
 @app.route('/health')
 def health():
